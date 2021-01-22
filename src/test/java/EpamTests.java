@@ -1,16 +1,20 @@
+import PageObjects.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.gen5.api.AfterAll;
-import org.junit.gen5.api.BeforeAll;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 
 public class EpamTests {
     protected static WebDriver driver;
+    private String url = "https://events.epam.com/";
+    private static Logger logger = LogManager.getLogger(EpamTests.class);
 
-    private Logger logger = LogManager.getLogger(EpamTests.class);
+    MainPage mainPage;
+    EventsPage eventsPage;
+
 
     @BeforeAll
-    public void setUp()
+    public static void setUp()
     {
         String opt = "headless";
         //opt = System.getProperty("option").trim().toLowerCase();
@@ -21,9 +25,18 @@ public class EpamTests {
 
     }
 
+    @Test
+    public void test1() {
+        mainPage = new MainPage(driver);
+        mainPage.open(url);
+        logger.info("open page");
+        eventsPage = mainPage.openEventsPage();
+        logger.info("open events page");
+    }
+
 
     @AfterAll
-    public void close()
+    public static void close()
     {
         if (driver != null) driver.quit();
         logger.info("close driver");
