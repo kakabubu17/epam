@@ -1,13 +1,16 @@
+package tests;
 import PageObjects.*;
+import main.WebDriverFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 
-public class EpamTests {
+import java.text.ParseException;
+
+public class ViewFutureEventsTest extends TestBase {
     protected static WebDriver driver;
-    private String url = "https://events.epam.com/";
-    private static Logger logger = LogManager.getLogger(EpamTests.class);
+    private static Logger logger = LogManager.getLogger(ViewFutureEventsTest.class);
 
     MainPage mainPage;
     EventsPage eventsPage;
@@ -17,8 +20,8 @@ public class EpamTests {
     public static void setUp()
     {
         String opt = "headless";
-        //opt = System.getProperty("option").trim().toLowerCase();
         driver = WebDriverFactory.create("chrome", null);
+        //opt = System.getProperty("option").trim().toLowerCase();
         //WebDriverFactory.create(System.getProperty("browser").trim().toLowerCase(), opt);
         driver.manage().window().maximize();
         logger.info("driver initialized");
@@ -26,12 +29,19 @@ public class EpamTests {
     }
 
     @Test
-    public void test1() {
+    public void test() throws InterruptedException, ParseException {
         mainPage = new MainPage(driver);
         mainPage.open(url);
         logger.info("open page");
+
         eventsPage = mainPage.openEventsPage();
         logger.info("open events page");
+        Thread.sleep(5000); //убрать
+        eventsPage.upcomingEventsClick();
+        logger.info("open upcoming events");
+
+        Assertions.assertEquals(true, eventsPage.upcomingEventsIsUpcoming());
+        Assertions.assertEquals(eventsPage.upcomingEventsTabCount(), eventsPage.upcomingEventsCount());
     }
 
 

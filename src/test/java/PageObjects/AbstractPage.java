@@ -17,13 +17,13 @@ public abstract class AbstractPage {
 
     public void clickElement(String element)
     {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(element))));
+        new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(element))));
         driver.findElement(By.xpath(element)).click();
     }
 
     public void sendText(String text, String element)
     {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(element))));
+        new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(element))));
         driver.findElement(By.xpath(element)).clear();
         driver.findElement(By.xpath(element)).sendKeys(text);
     }
