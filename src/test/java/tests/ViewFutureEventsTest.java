@@ -15,6 +15,17 @@ public class ViewFutureEventsTest extends TestBase {
     MainPage mainPage;
     EventsPage eventsPage;
 
+    @BeforeAll
+    public static void setUp()
+    {
+        String opt = "headless";
+        driver = WebDriverFactory.create("chrome", null);
+        //opt = System.getProperty("option").trim().toLowerCase();
+        //WebDriverFactory.create(System.getProperty("browser").trim().toLowerCase(), opt);
+        driver.manage().window().maximize();
+        logger.info("driver initialized");
+
+    }
 
 
     @Test
