@@ -79,6 +79,7 @@ public class EventsPage extends AbstractPage {
                 .toLocalDate();
     }
 
+
     public boolean isElementsLocatedRight() {
 
         if (locationElement(eventPlace).getX() < locationElement(eventLang).getX()
