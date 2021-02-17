@@ -15,9 +15,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class EventsPage extends AbstractPage {
+public class EventListPage extends AbstractPage {
 
-    public EventsPage (WebDriver driver) { super(driver);}
+    public EventListPage (WebDriver driver) { super(driver);}
 
     private String upcomingEventsTab = "//span[text()='Upcoming events']/..";
     private String pastEventsTab = "//span[text()='Past Events']/..";
@@ -34,12 +34,12 @@ public class EventsPage extends AbstractPage {
     private String loader = "//div[@class='evnt-global-loader']";
     //TODO: информация о регистрации на событие ??
 
-    public EventsPage upcomingEventsClick() {
+    public EventListPage upcomingEventsClick() {
         clickElement(upcomingEventsTab);
         return this;
     }
 
-    public EventsPage openPastEvents() {
+    public EventListPage openPastEvents() {
         clickElement(pastEventsTab);
         return this;
 
@@ -135,12 +135,18 @@ public class EventsPage extends AbstractPage {
 
     }
 
-    public EventsPage locationClick() {
+    public EventListPage locationClick() {
         clickElement(location);
         return this;
     }
 
-    public EventsPage setCountryFilter (String country) {
+    public EventListPage eventClick() {
+        clickElement(eventTitle);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains("events/"));
+        return this;
+    }
+
+    public EventListPage setCountryFilter (String country) {
         clickElement(locationInput);
         sendText(country, locationInput);
         clickElement(locationCheckbox.replace("%1", country));

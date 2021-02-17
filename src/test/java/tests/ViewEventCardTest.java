@@ -1,6 +1,6 @@
 package tests;
 
-import PageObjects.EventsPage;
+import PageObjects.EventListPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +17,7 @@ public class ViewEventCardTest extends TestBase{
 
     @Test
     public void test() throws InterruptedException, ParseException {
-        EventsPage eventsPage = openUpcomingEvents();
+        EventListPage eventsPage = openUpcomingEvents();
 
         Assertions.assertEquals(true, eventsPage.checkEventsDate(true));
         Assertions.assertEquals(true, eventsPage.placeIsDisplayed());

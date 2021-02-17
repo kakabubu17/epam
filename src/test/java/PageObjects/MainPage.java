@@ -13,8 +13,8 @@ public class MainPage extends AbstractPage {
         return this;
     }
 
-    public EventsPage openEventsPage()  {
+    public EventListPage openEventsPage()  {
         clickElement(eventsTab);
-        return new EventsPage(driver);
+        return new EventListPage(driver);
     }
 }

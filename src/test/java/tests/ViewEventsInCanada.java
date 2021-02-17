@@ -1,6 +1,6 @@
 package tests;
 
-import PageObjects.EventsPage;
+import PageObjects.EventListPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -12,15 +12,15 @@ public class ViewEventsInCanada extends TestBase {
 
     private static Logger logger = LogManager.getLogger(ViewFutureEventsTest.class);
 
-    EventsPage eventsPage;
+    EventListPage eventListPage1;
 
     @Test
     public void test() throws InterruptedException, ParseException {
-        eventsPage = openPastEvents();
-        eventsPage.locationClick();
-        eventsPage.setCountryFilter("Canada");
-        Assertions.assertEquals(eventsPage.eventsTabCount(), eventsPage.eventsCount());
-        Assertions.assertEquals(true, eventsPage.checkEventsDate(false));
+        eventListPage = openPastEvents();
+        eventListPage.locationClick();
+        eventListPage.setCountryFilter("Canada");
+        Assertions.assertEquals(eventListPage.eventsTabCount(), eventListPage.eventsCount());
+        Assertions.assertEquals(true, eventListPage.checkEventsDate(false));
         logger.info("test4 is OK");
     }
 }

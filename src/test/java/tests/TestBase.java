@@ -1,16 +1,13 @@
 package tests;
 
-import PageObjects.EventsPage;
+import PageObjects.EventListPage;
 import PageObjects.MainPage;
 import main.WebDriverFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-
-import java.text.ParseException;
 
 public class TestBase {
 
@@ -19,7 +16,7 @@ public class TestBase {
     private static Logger logger = LogManager.getLogger(ViewFutureEventsTest.class);
 
     MainPage mainPage;
-    EventsPage eventsPage;
+    EventListPage eventListPage;
 
     @BeforeAll
     public static void setUp()
@@ -33,23 +30,23 @@ public class TestBase {
 
     }
 
-    protected EventsPage openUpcomingEvents() throws InterruptedException {
+    protected EventListPage openUpcomingEvents() throws InterruptedException {
 
         mainPage = openMainPage();
-        eventsPage = mainPage.openEventsPage();
+        eventListPage = mainPage.openEventsPage();
         logger.info("open events page");
         Thread.sleep(5000); //убрать
-        eventsPage.upcomingEventsClick();
+        eventListPage.upcomingEventsClick();
         logger.info("open upcoming events");
-        return eventsPage;
+        return eventListPage;
     }
-    protected EventsPage openPastEvents() throws InterruptedException {
+    protected EventListPage openPastEvents() throws InterruptedException {
 
         mainPage = openMainPage();
-        eventsPage = openEventPage();
-        eventsPage.openPastEvents();
+        eventListPage = openEventPage();
+        eventListPage.openPastEvents();
         logger.info("open past events");
-        return eventsPage;
+        return eventListPage;
     }
 
     protected MainPage openMainPage() {
@@ -59,12 +56,12 @@ public class TestBase {
         return mainPage;
     }
 
-    protected EventsPage openEventPage() throws InterruptedException {
+    protected EventListPage openEventPage() throws InterruptedException {
 
-        eventsPage = mainPage.openEventsPage();
+        eventListPage = mainPage.openEventsPage();
         logger.info("open events page");
         Thread.sleep(5000); //убрать
-        return eventsPage;
+        return eventListPage;
     }
 
 
