@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class AbstractPage {
 
     protected WebDriver driver;
+    protected String loader = "//div[@class='evnt-global-loader']";
 
     public AbstractPage(WebDriver driver) {
         this.driver = driver;
@@ -15,10 +16,16 @@ public abstract class AbstractPage {
 
     //protected WebDriverWait wait = new WebDriverWait(driver, 10);
 
-    public void clickElement(String element)
+    public void clickElementByXpath(String element)
+    {
+        new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(element))));
+        driver.findElement(By.xpath(element)).click();
+    }
+
+    public void clickElementById(String element)
     {
         new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(element))));
-        driver.findElement(By.xpath(element)).click();
+        driver.findElement(By.id(element)).click();
     }
 
     public void sendText(String text, String element)

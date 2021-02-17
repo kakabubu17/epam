@@ -31,16 +31,16 @@ public class EventListPage extends AbstractPage {
     private String location = "//span[text()='Location']/..";
     private String locationInput = location + "/following-sibling::div/div[contains(@class, 'search')]/input";
     private String locationCheckbox = "//label[@data-value='%1']";
-    private String loader = "//div[@class='evnt-global-loader']";
+
     //TODO: информация о регистрации на событие ??
 
     public EventListPage upcomingEventsClick() {
-        clickElement(upcomingEventsTab);
+        clickElementByXpath(upcomingEventsTab);
         return this;
     }
 
     public EventListPage openPastEvents() {
-        clickElement(pastEventsTab);
+        clickElementByXpath(pastEventsTab);
         return this;
 
     }
@@ -136,20 +136,20 @@ public class EventListPage extends AbstractPage {
     }
 
     public EventListPage locationClick() {
-        clickElement(location);
+        clickElementByXpath(location);
         return this;
     }
 
     public EventListPage eventClick() {
-        clickElement(eventTitle);
+        clickElementByXpath(eventTitle);
         new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains("events/"));
         return this;
     }
 
     public EventListPage setCountryFilter (String country) {
-        clickElement(locationInput);
+        clickElementByXpath(locationInput);
         sendText(country, locationInput);
-        clickElement(locationCheckbox.replace("%1", country));
+        clickElementByXpath(locationCheckbox.replace("%1", country));
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(loader))));
         new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath(loader))));
         return this;
