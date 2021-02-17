@@ -12,10 +12,10 @@ public class ViewFutureEventsTest extends TestBase {
 
     @Test
     public void test() throws InterruptedException, ParseException {
-        EventsPage eventsPage = openEventsPage();
+        EventsPage eventsPage = openUpcomingEvents();
 
-        Assertions.assertEquals(true, eventsPage.upcomingEventsIsUpcoming());
-        Assertions.assertEquals(eventsPage.upcomingEventsTabCount(), eventsPage.upcomingEventsCount());
+        Assertions.assertEquals(true, eventsPage.checkEventsDate(true));
+        Assertions.assertEquals(eventsPage.eventsTabCount(), eventsPage.eventsCount());
         logger.info("test1 is OK");
     }
 

@@ -17,9 +17,9 @@ public class ViewEventCardTest extends TestBase{
 
     @Test
     public void test() throws InterruptedException, ParseException {
-        EventsPage eventsPage = openEventsPage();
+        EventsPage eventsPage = openUpcomingEvents();
 
-        Assertions.assertEquals(true, eventsPage.upcomingEventsIsUpcoming());
+        Assertions.assertEquals(true, eventsPage.checkEventsDate(true));
         Assertions.assertEquals(true, eventsPage.placeIsDisplayed());
         Assertions.assertEquals(true, eventsPage.langIsDisplayed());
         Assertions.assertEquals(true, eventsPage.nameIsDisplayed());

@@ -33,11 +33,9 @@ public class TestBase {
 
     }
 
-    protected EventsPage openEventsPage() throws InterruptedException {
-        mainPage = new MainPage(driver);
-        mainPage.open(url);
-        logger.info("open page");
+    protected EventsPage openUpcomingEvents() throws InterruptedException {
 
+        mainPage = openMainPage();
         eventsPage = mainPage.openEventsPage();
         logger.info("open events page");
         Thread.sleep(5000); //убрать
@@ -45,6 +43,31 @@ public class TestBase {
         logger.info("open upcoming events");
         return eventsPage;
     }
+    protected EventsPage openPastEvents() throws InterruptedException {
+
+        mainPage = openMainPage();
+        eventsPage = openEventPage();
+        eventsPage.openPastEvents();
+        logger.info("open past events");
+        return eventsPage;
+    }
+
+    protected MainPage openMainPage() {
+        mainPage = new MainPage(driver);
+        mainPage.open(url);
+        logger.info("open page");
+        return mainPage;
+    }
+
+    protected EventsPage openEventPage() throws InterruptedException {
+
+        eventsPage = mainPage.openEventsPage();
+        logger.info("open events page");
+        Thread.sleep(5000); //убрать
+        return eventsPage;
+    }
+
+
 
     @AfterAll
     public static void close()
