@@ -19,8 +19,8 @@ public class MainPage extends AbstractPage {
         return new EventListPage(driver);
     }
 
-    public VideoPage openVideoPage()  {
+    public VideoListPage openVideoListPage()  {
         clickElementByXpath(videoTab);
-        return new VideoPage(driver);
+        return new VideoListPage(driver);
     }
 }

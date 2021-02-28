@@ -2,48 +2,46 @@ package PageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VideoPage extends AbstractPage {
+
+    private String lang = "//div[contains(@class, 'language')]/span";
+    private String topics = "//div[contains(@class, 'topic small')]/label";
+    private String address = "//div[contains(@class, 'location')]/span";
 
     public VideoPage (WebDriver driver) { super(driver); }
 
-    private String moreFilters = "//span[text()='More Filters']";
-    private String filter = "//span[text()='%1']/..";
-    private String filterInput = filter + "/following-sibling::div/div[contains(@class, 'search')]/input";
-    private String filterCheckbox = "//label[@data-value='%1']";
-    private String language = "//label[@data-value='%1']";
+    public boolean checkAddress(String filter) {
 
-    public VideoPage moreFiltersClick() {
-        waitingForLoader();
-        clickElementByXpath(moreFilters);
-        return this;
+        if (driver.findElement(By.xpath(address)).getText().contains(filter))
+            return true;
+
+        else return false;
+
     }
 
-    public VideoPage setFilter(String filterName, String value) {
-        clickElementByXpath(filter.replace("%1", filterName));
-        sendText(value, filterInput.replace("%1", filterName));
-        clickElementByXpath(filterCheckbox.replace("%1", value));
-        return this;
+    public boolean checkLang(String filter) {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(lang))));
+        if (driver.findElement(By.xpath(lang)).getText().contains(filter))
+            return true;
+
+        else return false;
     }
 
-    public VideoPage setLanguageFilter(String value) {
-        clickElementByXpath(filter.replace("%1", "Language"));
-        clickElementByXpath(language.replace("%1", value));
-        waitingForLoader();
-        return this;
+    public boolean checkTopic(String filter) {
+
+        List<WebElement> elems = driver.findElements(By.xpath(topics));
+        for (WebElement elem: elems )
+        {
+            if (elem.getText().equals(filter))
+                return true;
+        }
+        return false;
     }
-
-    public void waitingForLoader() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(loader))));
-        new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath(loader))));
-    }
-
-
-
-
-
-
-
 }
